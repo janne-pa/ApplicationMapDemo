@@ -1,6 +1,7 @@
 # Application Insights Console Monitor
 
 A C# console application that monitors HTTP status and stores results in Azure Blob Storage, with full Application Insights telemetry integration.
+https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-map
 
 This demo will cast following Application Map into Azure Portal:
 
