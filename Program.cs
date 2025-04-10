@@ -70,7 +70,7 @@ namespace MyConsoleApp
                     var content = $"Status: {response.StatusCode}\nTimestamp: {DateTime.UtcNow}";
                     using var stream = new MemoryStream(Encoding.UTF8.GetBytes(content));
 
-                    // Track blob storage dependency explicitly
+                    // #1 Track blob storage dependency explicitly
                     telemetryClient.TrackDependency(
                         dependencyTypeName: "Azure Blob",
                         target: containerClient.Uri.Host,
@@ -83,7 +83,7 @@ namespace MyConsoleApp
 
                     await blobClient.UploadAsync(stream, true);
 
-                    // Track dependency with operation context
+                    // #2 Track dependency with operation context
                     telemetryClient.TrackDependency(
                         dependencyTypeName: "HTTP",
                         target: "microsoft.com",
@@ -96,6 +96,7 @@ namespace MyConsoleApp
                         resultCode: response.StatusCode.ToString(),
                         success: response.IsSuccessStatusCode);
 
+                    // #3 Do heartbeat tracking
                     telemetryClient.TrackEvent("HeartbeatEvent");
 
                     // Print every 10th heartbeat
