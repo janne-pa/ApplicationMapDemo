@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Insights Demo</title>
+    
+    <!-- 
+    =====================================================================
+    IMPORTANT: Replace these values with your own Application Insights keys
+    =====================================================================
+    To find your values:
+    1. Go to Azure Portal > Application Insights resource
+    2. Navigate to "API Access" or "Overview"
+    3. Copy the Connection String and Instrumentation Key
+
+    REMEMBER: Do not expose your keys in public repositories or client-side code.
+
+    -->
+    <script type="text/javascript">
+        !function(T,l,y){var S=T.location,k="script",D="instrumentationKey",C="ingestionendpoint",I="disableExceptionTracking",E="ai.device.",b="toLowerCase",w="crossOrigin",N="POST",e="appInsightsSDK",t=y.name||"appInsights";(y.name||T[e])&&(T[e]=t);var n=T[t]||function(d){var g=!1,f=!1,m={initialize:!0,queue:[],sv:"7",version:2,config:d};function v(e,t){var n={},a="Browser";return n[E+"id"]=a[b](),n[E+"type"]=a,n["ai.operation.name"]=S&&S.pathname||"_unknown_",n["ai.internal.sdkVersion"]="javascript:snippet_"+(m.sv||m.version),{time:function(){var e=new Date;function t(e){var t=""+e;return 1===t.length&&(t="0"+t),t}return e.getUTCFullYear()+"-"+t(1+e.getUTCMonth())+"-"+t(e.getUTCDate())+"T"+t(e.getUTCHours())+":"+t(e.getUTCMinutes())+":"+t(e.getUTCSeconds())+"."+((e.getUTCMilliseconds()/1e3).toFixed(3)+"").slice(2,5)+"Z"}(),iKey:e,name:"Microsoft.ApplicationInsights."+e.replace(/-/g,"")+"."+t,sampleRate:100,tags:n,data:{baseData:{ver:2}}}}var h=d.url||y.src;if(h){function a(e){var t,n,a,i,r,o,s,c,u,p,l;g=!0,m.queue=[],f||(f=!0,t=h,s=function(){var e={},t=d.connectionString;if(t)for(var n=t.split(";"),a=0;a<n.length;a++){var i=n[a].split("=");2===i.length&&(e[i[0][b]()]=i[1])}if(!e[C]){var r=e.endpointsuffix,o=r?e.location:null;e[C]="https://"+(o?o+".":"")+"dc."+(r||"services.visualstudio.com")}return e}(),c=s[D]||d[D]||"",u=s[C],p=u?u+"/v2/track":d.endpointUrl,(l=[]).push((n="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",a=t,i=p,(o=(r=v(c,"Exception")).data).baseType="ExceptionData",o.baseData.exceptions=[{typeName:"SDKLoadFailed",message:n.replace(/\./g,"-"),hasFullStack:!1,stack:n+"\nSnippet failed to load ["+a+"] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: "+(S&&S.pathname||"_unknown_")+"\nEndpoint: "+i,parsedStack:[]}],r)),l.push(function(e,t,n,a){var i=v(c,"Message"),r=i.data;r.baseType="MessageData";var o=r.baseData;return o.message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+n+")").replace(/\"/g,"")+'"',o.properties={endpoint:a},i}(0,0,t,p)),function(e,t){if(JSON){var n=T.fetch;if(n&&!y.useXhr)n(t,{method:N,body:JSON.stringify(e),mode:"cors"});else if(XMLHttpRequest){var a=new XMLHttpRequest;a.open(N,t),a.setRequestHeader("Content-type","application/json"),a.send(JSON.stringify(e))}}}(l,p))}function i(e,t){f||setTimeout(function(){!t&&m.core||a()},500)}var e=function(){var n=l.createElement(k);n.src=h;var e=y[w];return!e&&""!==e||"undefined"==n[w]||(n[w]=e),n.onload=i,n.onerror=a,n.onreadystatechange=function(e,t){"loaded"!==n.readyState&&"complete"!==n.readyState||i(0,t)},n}();y.ld<0?l.getElementsByTagName("head")[0].appendChild(e):setTimeout(function(){l.getElementsByTagName(k)[0].parentNode.appendChild(e)},y.ld||0)}try{m.cookie=l.cookie}catch(p){}function t(e){for(;e.length;)!function(t){m[t]=function(){var e=arguments;g||m.queue.push(function(){m[t].apply(m,e)})}}(e.pop())}var n="track",r="TrackPage",o="TrackEvent";t([n+"Event",n+"PageView",n+"Exception",n+"Trace",n+"DependencyData",n+"Metric",n+"PageViewPerformance","start"+r,"stop"+r,"start"+o,"stop"+o,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),m.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4};var s=(d.extensionConfig||{}).ApplicationInsightsAnalytics||{};if(!0!==d[I]&&!0!==s[I]){var c="onerror";t(["_"+c]);var u=T[c];T[c]=function(e,t,n,a,i){var r=u&&u(e,t,n,a,i);return!0!==r&&m["_"+c]({message:e,url:t,lineNumber:n,columnNumber:a,error:i}),r},d.autoExceptionInstrumented=!0}return m}(y.cfg);function a(){y.onInit&&y.onInit(n)}(T[t]=n).queue&&0===n.queue.length?(n.queue.push(a),n.trackPageView({})):a()}(window,document,{
+        src: "https://js.monitor.azure.com/scripts/b/ai.2.min.js",
+        ld: -1,
+        cfg: {
+            instrumentationKey: "KEY-HERE",
+            connectionString: "YOUR_CONNECTION_STRING",
+            enableRequestHeaderTracking: true,
+            enableResponseHeaderTracking: true
+        }
+    });
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #0078d4;
+        }
+        button {
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #106ebe;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .setup-guide {
+            background-color: #f0f7ff;
+            border-left: 4px solid #0078d4;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .setup-guide h3 {
+            margin-top: 0;
+        }
+        .setup-guide code {
+            background-color: #f1f1f1;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: Consolas, monospace;
+        }
+        .setup-step {
+            margin-bottom: 10px;
+        }
+        .feature-guide {
+            background-color: #f5f5f5;
+            border-left: 4px solid #5c2d91;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .feature-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .feature-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .feature-item h4 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: #5c2d91;
+        }
+        .feature-item ul {
+            margin-top: 5px;
+        }
+        .azure-guide {
+            background-color: #f9f9ff;
+            border-left: 4px solid #804998;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .azure-guide h3 {
+            margin-top: 0;
+            color: #804998;
+        }
+        .azure-section {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .azure-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .azure-section h4 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: #804998;
+        }
+        .azure-section ol, .azure-section ul {
+            margin-top: 5px;
+            padding-left: 20px;
+        }
+        .azure-section ol li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Application Insights Demo</h1>
+        <p>This page demonstrates Application Insights tracking in a web application.</p>
+        
+        <div class="setup-guide">
+            <h3>🔑 Setup Guide</h3>
+            <p>To use this demo, you need to configure your Application Insights keys:</p>
+            
+            <div class="setup-step">
+                <strong>1.</strong> Go to <a href="https://portal.azure.com" target="_blank">Azure Portal</a> and open your Application Insights resource
+            </div>
+            
+            <div class="setup-step">
+                <strong>2.</strong> Find your connection details:
+                <ul>
+                    <li>Navigate to <strong>Overview</strong> > Look for <strong>Instrumentation Key</strong></li>
+                    <li>Or go to <strong>API Access</strong> > Copy the <strong>Connection String</strong></li>
+                </ul>
+            </div>
+            
+            <div class="setup-step">
+                <strong>3.</strong> Replace the placeholder values in the HTML head:
+                <ul>
+                    <li><code>instrumentationKey: "YOUR_INSTRUMENTATION_KEY"</code></li>
+                    <li><code>connectionString: "YOUR_CONNECTION_STRING"</code></li>
+                </ul>
+            </div>
+                        
+            <p><em>Note: Use the same Application Insights resource as your console application for the full Application Map experience.</em></p>
+        </div>
+
+        <h2>Test Application Insights Tracking:</h2>
+        <div class="button-container">
+            <button id="trackEvent">Track Custom Event</button>
+            <button id="trackException">Simulate Error</button>
+            <button id="trackMetric">Track Custom Metric</button>
+            <button id="trackDependency">Simulate Dependency</button>
+        </div>
+
+        <div id="result"></div>
+
+        <div class="feature-guide">
+            <h3>📊 Button Functions Explained</h3>
+            
+            <div class="feature-item">
+                <h4>Track Custom Event</h4>
+                <p>Tracks user interactions or business events in your application.</p>
+                <ul>
+                    <li>Records a "ButtonClicked" event with custom properties</li>
+                    <li>Useful for analyzing user behavior patterns</li>
+                    <li>Appears in the <strong>Events</strong> section of Application Insights</li>
+                </ul>
+            </div>
+            
+            <div class="feature-item">
+                <h4>Simulate Error</h4>
+                <p>Demonstrates how exceptions are captured and reported.</p>
+                <ul>
+                    <li>Deliberately throws and catches a JavaScript error</li>
+                    <li>Reports exception details to Application Insights</li>
+                    <li>Appears in the <strong>Failures</strong> section</li>
+                </ul>
+            </div>
+            
+            <div class="feature-item">
+                <h4>Track Custom Metric</h4>
+                <p>Records numeric values that can be analyzed statistically.</p>
+                <ul>
+                    <li>Sends a random value (0-100) as "RandomMetric"</li>
+                    <li>Useful for tracking business metrics or performance indicators</li>
+                    <li>Appears in the <strong>Metrics</strong> section where you can see min/max/avg</li>
+                </ul>
+            </div>
+            
+            <div class="feature-item">
+                <h4>Simulate Dependency</h4>
+                <p>Tracks calls to external systems or services.</p>
+                <ul>
+                    <li>Simulates an API call with random success/failure (75% success rate)</li>
+                    <li>Measures duration and records response code</li>
+                    <li>Critical for building the Application Map visualization</li>
+                    <li>Appears in the <strong>Dependencies</strong> section</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="azure-guide">
+            <h3>🔍 Finding Your Data in Azure Portal</h3>
+            
+            <div class="azure-section">
+                <h4>1. Track Custom Event</h4>
+                <p>Find your custom events in:</p>
+                <ul>
+                    <li><strong>Transaction search</strong> with filter type "Custom Event"</li>
+                    <li><strong>Events</strong> section under "Usage" menu</li>
+                    <li>Search for the name: "ButtonClicked"</li>
+                </ul>
+            </div>
+            
+            <div class="azure-section">
+                <h4>2. Simulate Error</h4>
+                <p>Find your exceptions in:</p>
+                <ul>
+                    <li><strong>Transaction search</strong> with filter type "Exception"</li>
+                    <li><strong>Failures</strong> section in the left menu</li>
+                    <li>Look for message: "This is a test exception"</li>
+                </ul>
+            </div>
+            
+            <div class="azure-section">
+                <h4>3. Track Custom Metric</h4>
+                <p>Find your metrics in:</p>
+                <ol>
+                    <li>Go to <strong>Metrics</strong> in the left navigation menu</li>
+                    <li>In the metrics selector:
+                        <ul>
+                            <li>Select "Custom" from the metric namespace</li>
+                            <li>Choose "RandomMetric" from the metric dropdown</li>
+                        </ul>
+                    </li>
+                    <li>Configure the chart:
+                        <ul>
+                            <li>Set the aggregation to Average, Count, Max, or Sum</li>
+                            <li>Choose a time range (start with "Last 30 minutes" for testing)</li>
+                        </ul>
+                    </li>
+                    <li>For individual metric values:
+                        <ul>
+                            <li>Go to <strong>Transaction search</strong></li>
+                            <li>Filter by Type = "Metric"</li>
+                            <li>Look for "RandomMetric" in the results</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            
+            <div class="azure-section">
+                <h4>4. Simulate Dependency</h4>
+                <p>Find your dependencies in:</p>
+                <ul>
+                    <li><strong>Transaction search</strong> with filter type "Dependency"</li>
+                    <li><strong>Performance</strong> section in the left menu</li>
+                    <li><strong>Application map</strong> to see the visual connections</li>
+                    <li>Look for target "api.example.com" with response codes</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('trackEvent').addEventListener('click', function() {
+            // Track a custom event
+            appInsights.trackEvent({
+                name: "ButtonClicked", 
+                properties: { buttonType: "trackEvent", userAction: "manual" }
+            });
+            displayResult("Custom event tracked: ButtonClicked");
+        });
+        
+        document.getElementById('trackException').addEventListener('click', function() {
+            try {
+                // Deliberately throw an error
+                throw new Error("This is a test exception");
+            } catch (e) {
+                // Track the exception
+                appInsights.trackException({ exception: e });
+                displayResult("Exception tracked: " + e.message);
+            }
+        });
+        
+        document.getElementById('trackMetric').addEventListener('click', function() {
+            // Track a custom metric
+            const randomValue = Math.round(Math.random() * 100);
+            appInsights.trackMetric({ 
+                name: "RandomMetric", 
+                average: randomValue 
+            });
+            displayResult(`Metric tracked: RandomMetric = ${randomValue}`);
+        });
+        
+        document.getElementById('trackDependency').addEventListener('click', function() {
+            // Start timing
+            const startTime = new Date();
+            
+            // Simulate an API call
+            simulateApiCall().then(function(result) {
+                // Calculate duration
+                const duration = new Date() - startTime;
+                
+                // Track dependency
+                appInsights.trackDependencyData({
+                    id: "sim-dependency-" + new Date().getTime(),
+                    name: "OnePageHTMLDemo",
+                    duration: duration,
+                    success: result.success,
+                    responseCode: result.status,
+                    type: "HTTP",
+                    target: "api.example.com"
+                });
+                
+                displayResult(`Dependency tracked: SimulatedAPI (${result.status})`);
+                            });
+        });
+        
+        // Simulate an API call with a delay
+        function simulateApiCall() {
+            return new Promise(function(resolve) {
+                setTimeout(function() {
+                    // 90% success rate
+                    const success = Math.random() > 0.25;
+                    resolve({
+                        success: success,
+                        status: success ? 200 : 500
+                    });
+                }, 300 + Math.random() * 700); // Random delay between 300-1000ms
+            });
+        }
+        
+        function displayResult(message) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<p>${message}</p>` + resultDiv.innerHTML;
+        }
+        
+        // Track page view when the page loads
+        window.addEventListener('load', function() {
+            appInsights.trackPageView({
+                name: "Demo Homepage",
+                properties: {
+                    referrer: document.referrer,
+                    screenWidth: window.innerWidth
+                }
+            });
+        });
+    </script>
+</body>
+</html>
