@@ -1,22 +1,31 @@
-# Application Insights Console Monitor
+# Application Insights Monitoring Demo
 
-A C# console application that monitors HTTP status and stores results in Azure Blob Storage, with full Application Insights telemetry integration.
-https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-map
-
-This demo will cast following Application Map into Azure Portal:
+A demonstration project showing Application Insights integration with both a C# console application and a browser-based HTML application. This project helps visualize how different application components appear in the Application Map.
 
 ![Application Map](./application-map-snapshot.png)
 
+## Project Components
+
+### 1. Console Application
+A background service that performs periodic health checks and stores results in Azure storage.
+
+### 2. Web Demo Page (OnePageTelemetry.html)
+An interactive HTML page demonstrating different types of Application Insights telemetry.
 
 ## Features
 
-- HTTP status monitoring of microsoft.com
-- Azure Blob Storage integration for status logging
-- Application Insights integration with:
-  - Live Metrics streaming
-  - Application Map support
-  - Dependency tracking
+- **Console Application**:
+  - HTTP status monitoring of microsoft.com
+  - Azure Blob Storage integration for status logging
+  - Operation context tracking
+  - Custom event generation
+
+- **Web Demo Page**:
+  - Custom event tracking
   - Exception monitoring
+  - Custom metric recording
+  - Dependency tracking
+  - Interactive visual guides for finding data in Azure Portal
 
 ## Prerequisites
 
@@ -27,48 +36,61 @@ This demo will cast following Application Map into Azure Portal:
 
 ## Configuration
 
-The application requires two connection strings:
+### Console Application
+Add a `.env` file with the following connection strings:
 
-1. **Application Insights**
-   - Connection string format:
-     ```
-     InstrumentationKey=<your-key>;IngestionEndpoint=https://<location>.in.applicationinsights.azure.com/
-     ```
+```
+APPLICATIONINSIGHTS_CONNECTION_STRING=InstrumentationKey=<your-key>;IngestionEndpoint=https://<location>.in.applicationinsights.azure.com/
+AZURE_STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=<storage-name>;AccountKey=<storage-key>;EndpointSuffix=core.windows.net
+```
 
-2. **Azure Storage**
-   - Connection string format:
-     ```
-     DefaultEndpointsProtocol=https;AccountName=<storage-name>;AccountKey=<storage-key>;EndpointSuffix=core.windows.net
-     ```
+### Web Demo Page
+Update the `instrumentationKey` in `OnePageTelemetry.html` with your Application Insights key.
 
 ## Monitoring Features
 
-- **Live Metrics**: View real-time performance in Azure Portal
-- **Application Map**: Visualize dependencies:
-  - HTTP calls to microsoft.com
-  - Blob storage operations
-- **Custom Events**: "HeartbeatEvent" tracked every second
-- **Dependencies**: Tracked for both HTTP and Blob operations
-- **Exceptions**: Automatic tracking of any runtime errors
+- **Console Application**:
+  - Live Metrics: View real-time performance in Azure Portal
+  - Application Map: Visualize dependencies:
+    - HTTP calls to microsoft.com
+    - Blob storage operations
+  - Custom Events: "HeartbeatEvent" tracked every second
+  - Dependencies: Tracked for both HTTP and Blob operations
+  - Exceptions: Automatic tracking of any runtime errors
+
+- **Web Demo Page**:
+  - Custom Events: Triggered by user interactions
+  - Exceptions: Simulated errors for testing
+  - Metrics: Custom metrics for user actions
+  - Dependencies: Tracked for external API calls
 
 ## Output
 
-- Console displays heartbeat status every 10 operations
-- Blob storage receives status files with format: `status-YYYY-MM-DD-HH-mm-ss.txt`
-- Application Insights receives:
-  - Custom events
-  - Dependency calls
-  - Exceptions
-  - Performance metrics
+- **Console Application**:
+  - Console displays heartbeat status every 10 operations
+  - Blob storage receives status files with format: `status-YYYY-MM-DD-HH-mm-ss.txt`
+  - Application Insights receives:
+    - Custom events
+    - Dependency calls
+    - Exceptions
+    - Performance metrics
+
+- **Web Demo Page**:
+  - Application Insights receives:
+    - Custom events
+    - Exceptions
+    - Metrics
+    - Dependency calls
 
 ## Local Development
 
 1. Clone the repository
 2. Set up connection strings
-3. Run the application:
+3. Run the console application:
    ```powershell
    dotnet run
    ```
+4. Open `OnePageTelemetry.html` in a browser for the web demo.
 
 ## Viewing Results
 
@@ -80,6 +102,9 @@ The application requires two connection strings:
 2. **Azure Storage Explorer**
    - Container: "httpstatus"
    - Files: Timestamped status reports
+
+3. **Web Demo Page**
+   - Open browser console to view telemetry logs.
 
 ## License
 
